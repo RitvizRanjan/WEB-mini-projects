@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0px;
+        }
+
+        #thisisid {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+
+        }
+
+        #dabba {
+            width: 100vw;
+            height: 100vh;
+            background-color: bisque;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 id="thisisid">coin game</h3>
+    <div id="dabba"></div>
+    <script>
+        let box = document.getElementById("dabba");
+        let sound = new Audio("./coin.mp3")
+        setInterval(function () {
+            let coin = document.createElement("img");
+            coin.src = "./unnamed.png";
+            coin.width = 90;
+            coin.height = 90;
+            let alive = true;
+
+            let rw = parseInt(window.innerWidth * Math.random());
+            let rh = parseInt(window.innerHeight * Math.random());
+
+            console.log(rh);
+
+            coin.style.setProperty("position", "absolute");
+            coin.style.setProperty("bottom", String(rh) + "px");
+            coin.style.setProperty("left", String(rw) + "px");
+
+
+
+            coin.onmouseover = function (event) {
+                console.log("grabbed a coin");
+                box.removeChild(coin);
+                alive = false;
+                sound.play();
+
+            };
+
+            console.log(coin.style);
+            box.appendChild(coin);
+
+            setTimeout(function () {
+                if (alive) {
+                    box.removeChild(coin);
+                }
+            }, 1000);
+        }, 200);
+    </script>
+</body>
+
+</html>
